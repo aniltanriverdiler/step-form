@@ -2,8 +2,17 @@ let currentStep = 1;
 
 const nextStep = (step) => {
   if (validateStep(step)) {
-    document.getElementById(`step${step}`).classList.remove("active");
-    document.getElementById(`step${step + 1}`).classList.add("active");
+    const current = document.getElementById(`step${step}`);
+    const next = document.getElementById(`step${step + 1}`);
+
+    // Aktif stepi yavaşça gizle
+    current.classList.remove("active");
+
+    // 300ms sonra yeni adımı aktif et
+    setTimeout(() => {
+      next.classList.add("active");
+    }, 300); // CSS animasyon süresiyle uyumlu
+
     currentStep++;
     if (step === 3) displaySummary();
   }
@@ -24,18 +33,26 @@ const validateStep = (step) => {
 const showAlert = (message, type) => {
   const alertContainer = document.getElementById("alertContainer");
   alertContainer.innerHTML = `
-  <div class="alert alert-${type} fade show alert-dismissable" role="alert">
-    ${message}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+    <div class="alert-custom" role="alert">
+      <strong>Hata:</strong> ${message}
+      <button type="button" class="btn-close mt-1" aria-label="Close" onclick="this.parentElement.remove()"></button>
+    </div>
   `;
 };
 
 const prevStep = (step) => {
-  document.getElementById(`step${step}`).classList.remove("active");
-  document.getElementById(`step${step - 1}`).classList.add("active");
+  const current = document.getElementById(`step${step}`);
+  const prev = document.getElementById(`step${step - 1}`);
+
+  current.classList.remove("active");
+
+  setTimeout(() => {
+    prev.classList.add("active");
+  }, 300); // animasyon süresi ile uyumlu
   currentStep--;
 };
+
+
 
 const displaySummary = () => {
   const fields = {

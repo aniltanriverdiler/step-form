@@ -1,7 +1,125 @@
+body {
+  background-color: #f8f9fa;
+  font-family: "Open Sans", sans-serif !important;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Başlık */
+h2 {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* Form Adımları */
 .step {
-  display: none;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.4s ease;
+  visibility: hidden;
 }
 
 .step.active {
-  display: block;
+  opacity: 1;
+  transform: translateX(0);
+  visibility: visible;
+  position: relative;
+}
+
+/* Butonlar */
+button {
+  min-width: 100px;
+  margin-right: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 8px 16px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.btn-success {
+  padding: 10px 18px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Alert */
+.alert-custom {
+  position: relative;
+  padding: 15px 20px;
+  border-left: 6px solid #dc3545;
+  background-color: #ffe9ec;
+  color: #721c24;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  animation: slideDownFade 0.4s ease forwards;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-custom .btn-close {
+  position: absolute;
+  top: 10px;
+  right: -24px;
+}
+
+/* Özet listesi */
+#summary ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#summary li {
+  padding: 6px 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+/* Modal başlığı */
+.modal-header.text-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.modal-header.text-danger {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+/* Responsive düzeltme */
+@media (max-width: 576px) {
+  .container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }

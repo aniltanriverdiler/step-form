@@ -9,6 +9,12 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -19,15 +25,15 @@
         <div class="step active" id="step1">
           <h4>Kişisel Bilgiler</h4>
           <div class="mb-3">
-            <label>Ad Soyad*</label>
+            <label class="mb-2">Ad Soyad*</label>
             <input type="text" class="form-control" id="fullname" required />
           </div>
           <div class="mb-3">
-            <label>E-Posta*</label>
+            <label class="mb-2">E-Posta*</label>
             <input type="email" class="form-control" id="email" required />
           </div>
           <div class="mb-3">
-            <label>Telefon*</label>
+            <label class="mb-2">Telefon*</label>
             <input type="tel" class="form-control" id="phone" required />
           </div>
           <button type="button" class="btn btn-primary" onclick="nextStep(1)">
@@ -37,15 +43,15 @@
         <div class="step" id="step2">
           <h4>Eğitim Bilgileri</h4>
           <div class="mb-3">
-            <label>Mezun Olunan Üniversite</label>
+            <label class="mb-2">Mezun Olunan Üniversite</label>
             <input type="text" class="form-control" id="university" required />
           </div>
           <div class="mb-3">
-            <label>Bölüm</label>
+            <label class="mb-2">Bölüm</label>
             <input type="text" class="form-control" id="department" required />
           </div>
           <div class="mb-3">
-            <label>Mezuniyet Yılı</label>
+            <label class="mb-2">Mezuniyet Yılı</label>
             <input
               type="number"
               class="form-control"
@@ -63,15 +69,15 @@
         <div class="step" id="step3">
           <h4>İş Deneyimi(Varsa)</h4>
           <div class="mb-3">
-            <label>Çalıştığı Şirket</label>
+            <label class="mb-2">Çalıştığı Şirket</label>
             <input type="text" class="form-control" id="company" />
           </div>
           <div class="mb-3">
-            <label>Pozisyon</label>
+            <label class="mb-2">Pozisyon</label>
             <input type="text" class="form-control" id="position" />
           </div>
           <div class="mb-3">
-            <label>Çalışma Süresi (Yıl)</label>
+            <label class="mb-2">Çalışma Süresi (Yıl)</label>
             <input type="number" class="form-control" id="experience" />
           </div>
           <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
@@ -95,12 +101,7 @@
       </form>
 
       <!-- Modal -->
-      <div
-        class="modal fade"
-        id="myModal"
-        tabindex="-1"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div id="modalHeader" class="modal-header">
@@ -128,7 +129,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <script src="script.js"></script>
