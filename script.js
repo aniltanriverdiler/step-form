@@ -5,19 +5,18 @@ const nextStep = (step) => {
     const current = document.getElementById(`step${step}`);
     const next = document.getElementById(`step${step + 1}`);
 
-    // Aktif stepi yavaşça gizle
     current.classList.remove("active");
 
-    // 300ms sonra yeni adımı aktif et
     setTimeout(() => {
       next.classList.add("active");
-    }, 300); // CSS animasyon süresiyle uyumlu
+    }, 300);
 
     currentStep++;
     if (step === 3) displaySummary();
   }
 };
 
+// Form Validate
 const validateStep = (step) => {
   let inputs = document.querySelectorAll(`#step${step} input[required]`);
   console.log(inputs);
@@ -48,11 +47,9 @@ const prevStep = (step) => {
 
   setTimeout(() => {
     prev.classList.add("active");
-  }, 300); // animasyon süresi ile uyumlu
+  }, 300);
   currentStep--;
 };
-
-
 
 const displaySummary = () => {
   const fields = {
@@ -72,7 +69,7 @@ const displaySummary = () => {
   for (const field in fields) {
     const value = document.getElementById(field).value.trim();
     if (value) {
-      summaryText += `<li><strong>${fields[field]}:</strong>${value}</li>`;
+      summaryText += `<li><strong>${fields[field]}: </strong>${value}</li>`;
     }
   }
   summaryText += "</ul>";
@@ -80,27 +77,30 @@ const displaySummary = () => {
 };
 
 // Post Request
-document.getElementById("applicationForm").addEventListener("submit", (event) => {
-  event.preventDefault();
+document
+  .getElementById("applicationForm")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  const formData = {
-    fullname: document.getElementById("fullname").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    university: document.getElementById("university").value,
-    department: document.getElementById("department").value,
-    graduationYear: document.getElementById("graduationYear").value,
-    company: document.getElementById("company").value,
-    position: document.getElementById("position").value,
-    experience: document.getElementById("experience").value,
-  };
+    const formData = {
+      fullname: document.getElementById("fullname").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      university: document.getElementById("university").value,
+      department: document.getElementById("department").value,
+      graduationYear: document.getElementById("graduationYear").value,
+      company: document.getElementById("company").value,
+      position: document.getElementById("position").value,
+      experience: document.getElementById("experience").value,
+    };
 
-  console.log("Form gönderildi!");
-  console.log(formData);
+    console.log("Form gönderildi!");
+    console.log(formData);
 
-  sendFormData(formData);
-});
+    sendFormData(formData);
+  });
 
+// Send Form Data
 const sendFormData = async (formData) => {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -112,37 +112,43 @@ const sendFormData = async (formData) => {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      showModal("Başarılı!", "Form başarıyla gönderildi.", true);
-      console.log("Başarıyla gönderildi:", data);
+      showModal(
+        "Başvuru Başarılı",
+        "Başvurunuz başarıyla gönderildi.",
+        "success"
+      );
+      document.getElementById("applicationForm").reset();
+      currentStep = 1;
+      document
+        .querySelectorAll(".step")
+        .forEach((step) => step.classList.remove("active"));
+      document.getElementById("step1").classList.add("active");
     } else {
-      console.error("Hata oluştu:", response.status, response.statusText);
+      showModal("Hata", "Gönderim sırasında bir sorun oluştu.", "danger");
     }
   } catch (error) {
-    showModal("Hata!", "Form gönderilirken bir hata oluştu.", false);
-    console.error("Bağlantı hatası:", error);
+    showModal(
+      "Hata",
+      "Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.",
+      "danger"
+    );
   }
 };
 
 // Result Modal
-const showModal = (title, message, isSuccess) => {
-  document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalMessage").innerText = message;
-
+const showModal = (title, message, type) => {
+  const modalTitle = document.getElementById("modalTitle");
+  const modalMessage = document.getElementById("modalMessage");
   const modalHeader = document.getElementById("modalHeader");
-  if (isSuccess) {
-    modalHeader.classList.add("text-success");
-    modalHeader.classList.remove("text-danger");
-  } else {
-    modalHeader.classList.add("text-danger");
-    modalHeader.classList.remove("text-success");
-  }
+
+  modalTitle.textContent = title;
+  modalMessage.textContent = message;
+
+  modalHeader.classList.remove("text-success", "text-danger");
+  modalHeader.classList.add(
+    type === "success" ? "text-success" : "text-danger"
+  );
 
   const modal = new bootstrap.Modal(document.getElementById("myModal"));
   modal.show();
-
-  document.getElementById("closeButton").addEventListener("click", () => {
-    const modal = new bootstrap.Modal(document.getElementById("myModal"));
-    modal.hide();
-  });
 };

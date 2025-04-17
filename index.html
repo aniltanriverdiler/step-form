@@ -18,10 +18,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Form Section -->
     <div class="container mt-4">
       <h2 class="text-center">İş Başvuru Form</h2>
       <div id="alertContainer"></div>
       <form id="applicationForm">
+        <!-- Form Step - 1 -->
         <div class="step active" id="step1">
           <h4>Kişisel Bilgiler</h4>
           <div class="mb-3">
@@ -36,10 +38,11 @@
             <label class="mb-2">Telefon*</label>
             <input type="tel" class="form-control" id="phone" required />
           </div>
-          <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+          <button type="button" class="btn btn-success " onclick="nextStep(1)">
             İleri
           </button>
         </div>
+        <!-- Form Step - 2 -->
         <div class="step" id="step2">
           <h4>Eğitim Bilgileri</h4>
           <div class="mb-3">
@@ -62,12 +65,13 @@
           <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
             Geri
           </button>
-          <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+          <button type="button" class="btn btn-success" onclick="nextStep(2)">
             İleri
           </button>
         </div>
+        <!-- Form Step - 3 -->
         <div class="step" id="step3">
-          <h4>İş Deneyimi(Varsa)</h4>
+          <h4>İş Deneyimi (Varsa)</h4>
           <div class="mb-3">
             <label class="mb-2">Çalıştığı Şirket</label>
             <input type="text" class="form-control" id="company" />
@@ -83,11 +87,11 @@
           <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
             Geri
           </button>
-          <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+          <button type="button" class="btn btn-success" onclick="nextStep(3)">
             İleri
           </button>
         </div>
-
+        <!-- Form Step - 4 -->
         <div class="step" id="step4">
           <h4>Başvurunuzu Kontrol Edin</h4>
           <div id="summary"></div>
@@ -100,7 +104,7 @@
         </div>
       </form>
 
-      <!-- Modal -->
+      <!-- Form Control Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
